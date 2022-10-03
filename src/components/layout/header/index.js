@@ -16,6 +16,8 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import {useNavigate} from "react-router-dom";
 
+import {manualLogout} from "../../../lib/utils/logout";
+
 const StyleToolbar = styled(Toolbar)({
     display: "flex",
     justifyContent: "space-between"
@@ -74,7 +76,7 @@ function Header() {
                         <MenuItem
                             onClick={() => {
                                 setAnchorEl(null);
-                                navigate("/");
+                                manualLogout(navigate);
                             }}>
                             Logout
                         </MenuItem>
