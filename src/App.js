@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react";
+
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+
+// Layout wrapper
+import LayoutWrapper from "./components/layout";
+
+// Pages
+import DashboardPage from "./pages/dashboard";
+import UsersPage from "./pages/Users";
+import OrganizerPage from "./pages/organizer";
+import EventPlanner from "./features/eventPlanner";
+import LogsPage from "./pages/Logs";
+import LoginPage from "./pages/auth/login";
+
+// State
+import {Provider} from "react-redux";
+import store from "./store";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [isLogged, setIsLogged] = useState(true);
+
+    return (
+        <Provider store={store}>
+            <Router>
+                <Routes>
+                    <Route exact path="/" element={<LoginPage />} />
+                    <Route exact path="/login" element={<LoginPage />} />
+                </Routes>
+                <LayoutWrapper>
+                    <Routes>
+                        <Route path="/dashboard" element={<DashboardPage />} />
+                        <Route path="/users" element={<UsersPage />} />
+                        <Route path="/organizers" element={<OrganizerPage />} />
+                        <Route
+                            path="/event-planners"
+                            element={<EventPlanner />}
+                        />
+                        <Route path="/logs" element={<LogsPage />} />
+                    </Routes>
+                </LayoutWrapper>
+            </Router>
+        </Provider>
+    );
 }
 
 export default App;
