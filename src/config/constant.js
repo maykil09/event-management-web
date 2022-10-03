@@ -43,3 +43,8 @@ export const months = [
     "November",
     "December"
 ];
+
+// session
+export const STORAGE = {
+    ACCESS_TOKEN: "token"
+};

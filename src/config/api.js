@@ -2,7 +2,7 @@ const env = "dev";
 
 const base_api_url = {
     dev: "http://localhost:5000/api/",
-    prod: ""
+    prod: "https://event-management-back.herokuapp.com/api/"
 };
 
 const api_url = {

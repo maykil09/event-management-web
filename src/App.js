@@ -17,11 +17,16 @@ import LoginPage from "./pages/auth/login";
 import {Provider} from "react-redux";
 import store from "./store";
 
+// toast
+import "react-toastify/dist/ReactToastify.css";
+import {ToastContainer} from "react-toastify";
+
 function App() {
     const [isLogged, setIsLogged] = useState(true);
 
     return (
         <Provider store={store}>
+            <ToastContainer />
             <Router>
                 <Routes>
                     <Route exact path="/" element={<LoginPage />} />

@@ -1,7 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import {Box, Typography, Avatar, Button, TextField} from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import {useNavigate} from "react-router-dom";
+
+import {toast} from "react-toastify";
 
 // store
 import {useDispatch} from "react-redux";
@@ -11,15 +13,25 @@ function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const [credentials, setCredentials] = useState({
+        email: null,
+        password: null
+    });
+
+    const [loading, setLoading] = useState(false);
+
     const onSubmit = async () => {
-        const payload = {
-            email: "super-admin@gmail.com",
-            password: "Secret"
-        };
+        // const payload = {
+        //     email: "super-admin@gmail.com",
+        //     password: "Secret"
+        // };
 
-        console.log(payload);
-
-        dispatch(login(payload, navigate));
+        if (credentials.email !== null && credentials.password !== null) {
+            console.log(credentials);
+            dispatch(login(credentials, navigate));
+        } else {
+            toast.error("Fill up all field");
+        }
     };
 
     return (
@@ -46,6 +58,12 @@ function Login() {
                     name="email"
                     autoComplete="email"
                     autoFocus
+                    onChange={(e) =>
+                        setCredentials({
+                            ...credentials,
+                            email: e.target.value
+                        })
+                    }
                 />
                 <TextField
                     margin="normal"
@@ -56,6 +74,12 @@ function Login() {
                     type="password"
                     id="password"
                     autoComplete="current-password"
+                    onChange={(e) =>
+                        setCredentials({
+                            ...credentials,
+                            password: e.target.value
+                        })
+                    }
                 />
                 <Button
                     onClick={() => {
