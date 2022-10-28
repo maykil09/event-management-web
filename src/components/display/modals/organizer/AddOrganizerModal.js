@@ -9,9 +9,10 @@ function AddOrganizerModal(props) {
             maxWidth="sm"
             onClose={() => setOpenModal(false)}>
             <DialogTitle>
-                <Typography variant="h6">Add Organizer</Typography>
+                <Typography variant="span">Add Organizer</Typography>
             </DialogTitle>
             <DialogContent>{children}</DialogContent>
+            {/* <image src={}/> */}
         </Dialog>
     );
 }

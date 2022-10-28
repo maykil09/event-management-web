@@ -1,32 +1,37 @@
-// Tables
-export const userTableColumn = [
+// Tables headers
+export const userTableColumn = ["ID", "email", "Status", "Actions"];
+
+export const organizerTableColumn = ["ID", "email", "Status", "Actions"];
+
+export const eventPlannerTableColumn = ["ID", "email", "Status", "Actions"];
+
+export const logsTableColumn = ["Date", "Message", "Email", "Role"];
+
+export const bookingTableColumn = [
     "ID",
-    "First name",
-    "Last name",
-    "email",
-    "Status",
-    "Actions"
+    "Event Name",
+    "Customer Name",
+    "Event Type",
+    "status",
+    "Action"
 ];
 
-export const organizerTableColumn = [
+export const eventTableColumn = [
     "ID",
-    "First name",
-    "Last name",
-    "email",
-    "Status",
-    "Actions"
+    "Event Name",
+    "Event Type",
+    "Event Posted",
+    "Action"
 ];
 
-export const eventPlannerTableColumn = [
+export const planTableColumn = [
     "ID",
-    "First name",
-    "Last name",
-    "email",
+    "Plan Name",
+    "Description",
+    "Price",
     "Status",
-    "Actions"
+    "Action"
 ];
-
-export const logsTableColumn = ["Date", "Message", "User"];
 
 // Months
 export const months = [
@@ -46,5 +51,30 @@ export const months = [
 
 // session
 export const STORAGE = {
-    ACCESS_TOKEN: "token"
+    ACCESS_TOKEN: "token",
+    SESSION: "session"
 };
+
+// event type
+export const eventTypes = [
+    {
+        displayName: "Wedding",
+        value: "wedding"
+    },
+    {
+        displayName: "Kids Birthday Party",
+        value: "kids-birthday-party"
+    },
+    {
+        displayName: "Adults Birthday Party",
+        value: "adults-birthday-party"
+    },
+    {
+        displayName: "Disco",
+        value: "disco"
+    },
+    {
+        displayName: "Casual Party",
+        value: "casual-party"
+    }
+];

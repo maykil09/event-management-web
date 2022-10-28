@@ -14,7 +14,7 @@ function LayoutWrapper(props) {
             }}>
             <Header />
             <Stack
-                height={"100vh"}
+                minHeight={"100vh"}
                 direction="row"
                 spacing={2}
                 justifyContent="space-between"

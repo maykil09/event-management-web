@@ -1,15 +1,44 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {Typography, Grid, Box} from "@mui/material";
 
 // Custom components
 import DashboardCard from "../../components/display/cards/dashboard";
-import LineChart from "../../components/display/charts/LineChart";
 import SalesChart from "../../components/display/charts/sales";
 
 // Icon
 import PeopleIcon from "@mui/icons-material/People";
 
+//store
+import {useDispatch} from "react-redux";
+import {
+    getTotalCustomer,
+    getTotalOrganizer,
+    getTotalEventPlanner
+} from "../../store/auth/actions";
+
 function Dashboard() {
+    const [totalCustomer, setTotalCustomer] = useState(null);
+    const [totalOrganizer, setTotalOrganizer] = useState(null);
+    const [totalEventPlanner, setTotalEventPlanner] = useState(null);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (totalCustomer === null) {
+            console.log("fetching total customer");
+            dispatch(getTotalCustomer(setTotalCustomer));
+        }
+
+        if (totalOrganizer === null) {
+            console.log("fetching total organizer");
+            dispatch(getTotalOrganizer(setTotalOrganizer));
+        }
+
+        if (totalEventPlanner === null) {
+            dispatch(getTotalEventPlanner(setTotalEventPlanner));
+        }
+    }, []);
+
     return (
         <>
             <Typography variant="h4">Dashboard</Typography>
@@ -20,8 +49,8 @@ function Dashboard() {
                             boxShadow: 2
                         }}>
                         <DashboardCard
-                            name="Total Users"
-                            totalCount={100}
+                            name="Total Customer"
+                            totalCount={totalCustomer}
                             Icon={PeopleIcon}
                         />
                     </Box>
@@ -33,7 +62,7 @@ function Dashboard() {
                         }}>
                         <DashboardCard
                             name="Total Organizers"
-                            totalCount={40}
+                            totalCount={totalOrganizer}
                             color="secondary.main"
                             Icon={PeopleIcon}
                         />
@@ -46,7 +75,7 @@ function Dashboard() {
                         }}>
                         <DashboardCard
                             name="Total Event Planners"
-                            totalCount={30}
+                            totalCount={totalEventPlanner}
                             color="success.main"
                             Icon={PeopleIcon}
                         />

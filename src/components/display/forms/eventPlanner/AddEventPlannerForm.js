@@ -1,38 +1,76 @@
-import React from "react";
-import {TextField, Button, Grid, Container} from "@mui/material";
+import React, {useState} from "react";
+import {
+    TextField,
+    Button,
+    Grid,
+    Container,
+    IconButton,
+    InputAdornment
+} from "@mui/material";
 
-function AddEventPlannerForm() {
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+
+function AddEventPlannerForm({userForm, setUserForm, submitForm}) {
+    const [showPassword, setShowPassword] = useState(false);
     return (
-        <form>
-            <Container>
-                <Grid container spacing={2} pt={2}>
-                    <Grid item sm={12}>
-                        <TextField type="text" label="First name" fullWidth />
-                    </Grid>
-                    <Grid item sm={12}>
-                        <TextField type="text" label="Last name" fullWidth />
-                    </Grid>
-                    <Grid item sm={12}>
-                        <TextField type="text" label="Address" fullWidth />
-                    </Grid>
-                    <Grid item sm={12}>
-                        <TextField type="text" label="Email" fullWidth />
-                    </Grid>
-                    <Grid item sm={12}>
-                        <TextField
-                            type="number"
-                            label="Contact number"
-                            fullWidth
-                        />
-                    </Grid>
-                    <Grid item sm={12}>
-                        <Button variant="contained" fullWidth>
-                            Submit
-                        </Button>
-                    </Grid>
+        <Container>
+            <Grid container spacing={2} pt={2}>
+                <Grid item sm={12}>
+                    <TextField
+                        type="text"
+                        label="Email"
+                        defaultValue={userForm.email}
+                        onChange={(e) =>
+                            setUserForm({
+                                ...userForm,
+                                email: e.target.value
+                            })
+                        }
+                        fullWidth
+                    />
                 </Grid>
-            </Container>
-        </form>
+                <Grid item sm={12}>
+                    <TextField
+                        type={showPassword ? "text" : "password"}
+                        label="Password"
+                        defaultValue={userForm.password}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={() =>
+                                            setShowPassword(!showPassword)
+                                        }>
+                                        {showPassword ? (
+                                            <VisibilityIcon />
+                                        ) : (
+                                            <VisibilityOffIcon />
+                                        )}
+                                    </IconButton>
+                                </InputAdornment>
+                            )
+                        }}
+                        onChange={(e) =>
+                            setUserForm({
+                                ...userForm,
+                                password: e.target.value
+                            })
+                        }
+                        fullWidth
+                    />
+                </Grid>
+                <Grid item sm={12}>
+                    <Button
+                        variant="contained"
+                        onClick={() => submitForm(userForm)}
+                        fullWidth>
+                        Submit
+                    </Button>
+                </Grid>
+            </Grid>
+        </Container>
     );
 }
 

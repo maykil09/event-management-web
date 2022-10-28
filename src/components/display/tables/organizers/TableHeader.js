@@ -1,7 +1,7 @@
 import React from "react";
 import {TableHead, TableCell, TableRow, TableSortLabel} from "@mui/material";
 import {organizerTableColumn} from "../../../../config/constant";
-function TableHeader(props) {
+function TableHeader() {
     return (
         <TableHead>
             <TableRow>

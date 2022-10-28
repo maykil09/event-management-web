@@ -9,7 +9,7 @@ function AddEventPlannerModal(props) {
             maxWidth="sm"
             onClose={() => setOpenModal(false)}>
             <DialogTitle>
-                <Typography variant="h6">Add Event Planner</Typography>
+                <Typography variant="span">Add Event Planner</Typography>
             </DialogTitle>
             <DialogContent>{children}</DialogContent>
         </Dialog>

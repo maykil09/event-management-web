@@ -18,12 +18,15 @@ import {useNavigate} from "react-router-dom";
 
 import {manualLogout} from "../../../lib/utils/logout";
 
+import useAuth from "../../../lib/hooks/useAuth";
+
 const StyleToolbar = styled(Toolbar)({
     display: "flex",
     justifyContent: "space-between"
 });
 
 function Header() {
+    const user = useAuth();
     const navigate = useNavigate();
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -72,7 +75,16 @@ function Header() {
                         }}
                         open={Boolean(anchorEl)}
                         onClose={closeMenu}>
-                        <MenuItem onClick={closeMenu}>Profile</MenuItem>
+                        <MenuItem
+                            onClick={() =>
+                                navigate("/profile", {
+                                    state: {
+                                        component: "organizer"
+                                    }
+                                })
+                            }>
+                            Profile
+                        </MenuItem>
                         <MenuItem
                             onClick={() => {
                                 setAnchorEl(null);

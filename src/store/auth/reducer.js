@@ -1,7 +1,7 @@
 import {SET_USER_ROLE} from "./constant";
 
 const initialState = {
-    userRole: ""
+    userSession: {}
 };
 
 export default function (state = initialState, {type, payload}) {

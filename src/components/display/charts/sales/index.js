@@ -9,7 +9,6 @@ const randomSales = () => {
         sales.push(Math.floor(1000 + Math.random() * 1000000));
     }
 
-    console.log(sales);
     return sales;
 };
 

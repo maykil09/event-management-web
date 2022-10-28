@@ -13,8 +13,10 @@ import {
     Stack
 } from "@mui/material";
 
+import {Link} from "react-router-dom";
+
 // Mui colors
-import {red, green} from "@mui/material/colors";
+import {blue} from "@mui/material/colors";
 
 // Mui icons
 // import {CheckIcon} from "@mui/icons-material";
@@ -24,150 +26,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import DoneIcon from "@mui/icons-material/Done";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
-const rowSampleData = [
-    {
-        id: 1,
-        first_name: "John",
-        last_name: "Doe",
-        email: "johndoe@gmail.com",
-        status: true
-    },
-    {
-        id: 2,
-        first_name: "John",
-        last_name: "Snow",
-        email: "johnsnow@gmail.com",
-        status: false
-    },
-    {
-        id: 3,
-        first_name: "Felisa",
-        last_name: "Wright",
-        email: "felisa@gmail.com",
-        status: true
-    },
-    {
-        id: 4,
-        first_name: "Virginia",
-        last_name: "Paige",
-        email: "virginia@gmail.com",
-        status: true
-    },
-    {
-        id: 5,
-        first_name: "Christopher",
-        last_name: "Hom",
-        email: "Christopher@gmail.com",
-        status: true
-    },
-    {
-        id: 6,
-        first_name: "John",
-        last_name: "Doe",
-        email: "johndoe@gmail.com",
-        status: true
-    },
-    {
-        id: 7,
-        first_name: "John",
-        last_name: "Snow",
-        email: "johnsnow@gmail.com",
-        status: true
-    },
-    {
-        id: 8,
-        first_name: "Felisa",
-        last_name: "Wright",
-        email: "felisa@gmail.com",
-        status: true
-    },
-    {
-        id: 9,
-        first_name: "Virginia",
-        last_name: "Paige",
-        email: "virginia@gmail.com",
-        status: true
-    },
-    {
-        id: 10,
-        first_name: "Christopher",
-        last_name: "Hom",
-        email: "Christopher@gmail.com",
-        status: true
-    },
-    {
-        id: 11,
-        first_name: "John",
-        last_name: "Doe",
-        email: "johndoe@gmail.com",
-        status: true
-    },
-    {
-        id: 12,
-        first_name: "John",
-        last_name: "Snow",
-        email: "johnsnow@gmail.com",
-        status: true
-    },
-    {
-        id: 13,
-        first_name: "Felisa",
-        last_name: "Wright",
-        email: "felisa@gmail.com",
-        status: true
-    },
-    {
-        id: 14,
-        first_name: "Virginia",
-        last_name: "Paige",
-        email: "virginia@gmail.com",
-        status: true
-    },
-    {
-        id: 15,
-        first_name: "Christopher",
-        last_name: "Hom",
-        email: "Christopher@gmail.com",
-        status: true
-    },
-    {
-        id: 16,
-        first_name: "John",
-        last_name: "Doe",
-        email: "johndoe@gmail.com",
-        status: true
-    },
-    {
-        id: 17,
-        first_name: "John",
-        last_name: "Snow",
-        email: "johnsnow@gmail.com",
-        status: true
-    },
-    {
-        id: 18,
-        first_name: "Felisa",
-        last_name: "Wright",
-        email: "felisa@gmail.com",
-        status: true
-    },
-    {
-        id: 19,
-        first_name: "Virginia",
-        last_name: "Paige",
-        email: "virginia@gmail.com",
-        status: true
-    },
-    {
-        id: 20,
-        first_name: "Christopher",
-        last_name: "Hom",
-        email: "Christopher@gmail.com",
-        status: true
-    }
-];
-
-function EventPlannerTable() {
+function EventPlannerTable({eventPlannerData, selectPlanner}) {
     // menu state
     const [openAction, setOpenAction] = useState(null);
 
@@ -195,7 +54,11 @@ function EventPlannerTable() {
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
         page > 0
-            ? Math.max(0, (1 + page) * rowsPerPage - rowSampleData.length)
+            ? Math.max(
+                  0,
+                  (1 + page) * rowsPerPage -
+                      (eventPlannerData !== null ? eventPlannerData.length : 0)
+              )
             : 0;
 
     return (
@@ -203,59 +66,100 @@ function EventPlannerTable() {
             <Table>
                 <TableHeader />
                 <TableBody>
-                    {rowSampleData
-                        .slice(
-                            page * rowsPerPage,
-                            page * rowsPerPage + rowsPerPage
-                        )
-                        .map((row, i) => (
-                            <TableRow key={i}>
-                                <TableCell>{row.id}</TableCell>
-                                <TableCell>{row.first_name}</TableCell>
-                                <TableCell>{row.last_name}</TableCell>
-                                <TableCell>{row.email}</TableCell>
-                                <TableCell>
-                                    <Chip
-                                        color={row.status ? "success" : "error"}
-                                        label={
-                                            row.status
-                                                ? "Verified"
-                                                : "Not verified"
-                                        }
-                                        icon={
-                                            row.status ? (
-                                                <CheckCircleIcon color="primary" />
-                                            ) : (
-                                                <CancelIcon />
-                                            )
-                                        }
-                                    />
-                                </TableCell>
-                                <TableCell>
-                                    <Stack spacing={1}>
-                                        <Button
-                                            variant="outlined"
-                                            color="info"
-                                            startIcon={<VisibilityIcon />}>
-                                            View
-                                        </Button>
-                                        <Button
-                                            disabled={row.status}
-                                            variant="outlined"
-                                            color="success"
-                                            startIcon={<DoneIcon />}>
-                                            Approve
-                                        </Button>
-                                        <Button
-                                            variant="outlined"
-                                            color="error"
-                                            startIcon={<RestartAltIcon />}>
-                                            Reset Password
-                                        </Button>
-                                    </Stack>
-                                </TableCell>
-                            </TableRow>
-                        ))}
+                    {eventPlannerData === null
+                        ? ""
+                        : eventPlannerData
+                              .slice(
+                                  page * rowsPerPage,
+                                  page * rowsPerPage + rowsPerPage
+                              )
+                              .map((row, i) => (
+                                  <TableRow key={i}>
+                                      <TableCell>{row._id}</TableCell>
+                                      <TableCell>{row.email}</TableCell>
+                                      <TableCell>
+                                          <Chip
+                                              color={
+                                                  row.verified
+                                                      ? "success"
+                                                      : "error"
+                                              }
+                                              label={
+                                                  row.verified
+                                                      ? "Verified"
+                                                      : "Not verified"
+                                              }
+                                              icon={
+                                                  row.verified ? (
+                                                      <CheckCircleIcon color="primary" />
+                                                  ) : (
+                                                      <CancelIcon />
+                                                  )
+                                              }
+                                          />
+                                      </TableCell>
+                                      <TableCell>
+                                          <Stack spacing={1}>
+                                              <Link
+                                                  state={{
+                                                      component: "planner"
+                                                  }}
+                                                  to={
+                                                      row.disabled
+                                                          ? ""
+                                                          : `/profile/${row._id}`
+                                                  }
+                                                  style={{
+                                                      textDecoration: "none",
+                                                      color: blue[500],
+                                                      cursor: row.disabled
+                                                          ? "no-drop"
+                                                          : "pointer"
+                                                  }}>
+                                                  <Button
+                                                      disabled={row.disabled}
+                                                      sx={{
+                                                          width: "100%"
+                                                      }}
+                                                      variant="outlined"
+                                                      color="info"
+                                                      startIcon={
+                                                          <VisibilityIcon />
+                                                      }>
+                                                      View
+                                                  </Button>
+                                              </Link>
+                                              <span
+                                                  style={{
+                                                      width: "100%",
+                                                      cursor: !row.disabled
+                                                          ? "no-drop"
+                                                          : "pointer"
+                                                  }}>
+                                                  <Button
+                                                      fullWidth
+                                                      disabled={!row.disabled}
+                                                      variant="outlined"
+                                                      color="success"
+                                                      startIcon={<DoneIcon />}
+                                                      onClick={() =>
+                                                          selectPlanner(row._id)
+                                                      }>
+                                                      Approve
+                                                  </Button>
+                                              </span>
+                                              <Button
+                                                  variant="outlined"
+                                                  color="error"
+                                                  startIcon={
+                                                      <RestartAltIcon />
+                                                  }>
+                                                  Reset Password
+                                              </Button>
+                                          </Stack>
+                                      </TableCell>
+                                  </TableRow>
+                              ))}
                     {emptyRows > 0 && (
                         <TableRow
                             style={{
@@ -269,7 +173,7 @@ function EventPlannerTable() {
             <TablePagination
                 rowsPerPageOptions={[10, 25, 50]}
                 component="div"
-                count={rowSampleData.length}
+                count={eventPlannerData !== null ? eventPlannerData.length : 0}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
